@@ -6,6 +6,10 @@ import math
 # Необхідно написати програму на Python, яка використовує рекурсію для створення фрактала “дерево Піфагора”.
 # Програма має візуалізувати фрактал “дерево Піфагора”,
 # і користувач повинен мати можливість вказати рівень рекурсії.
+
+MIN_SQUARE_SIDE = 2
+
+
 def draw_square(t: turtle.Turtle, side: float, is_right: bool) -> None:
     """Draw a square with side s starting from current position/heading."""
 
@@ -21,13 +25,12 @@ def draw_square(t: turtle.Turtle, side: float, is_right: bool) -> None:
 def classic_pythagoras_tree(t: turtle.Turtle, side: float, depth: int, is_right: bool) -> None:
     """
     Classic Pythagoras tree:
-    1) draw a square of side s
+    1) draw a square
     2) go to its top-left corner
-    3) draw left child square on the left leg (rotation +theta)
-    4) move to attachment point for right child square and draw it (rotation -(90-theta))
-    theta is in radians.
+    3) draw left child square
+    4) move to attachment point for right child square and draw it.
     """
-    if depth == 0 or side < 2:
+    if depth == 0 or side < MIN_SQUARE_SIDE:
         return
 
     # Draw current square (base)
@@ -51,6 +54,7 @@ def classic_pythagoras_tree(t: turtle.Turtle, side: float, depth: int, is_right:
     next_side = side * math.sqrt(2) / 2
 
     # ---- Left child square ----
+    # From top-left corner, turn left 45 degrees to draw left child square
     t.penup()
     t.setposition(top_left)
     t.setheading(top_left_heading)
@@ -73,23 +77,25 @@ def classic_pythagoras_tree(t: turtle.Turtle, side: float, depth: int, is_right:
 
 
 def main(recursion_level):
+    '''Main function to set up turtle graphics.'''
+    
     screen = turtle.Screen()
-    screen.title("Classic Pythagoras Tree from squares with 45° branches")
+    screen.title(f"Classic Pythagoras Tree from squares with 45° branches. Recursion Level: {recursion_level})")
 
     t = turtle.Turtle()
     t.speed(0)  # set to 1..3 for slower
     t.pensize(2)
 
-    base_side = 120
+    initial_square_side = 120
 
     # Place base square
     t.penup()
-    t.goto(-base_side / 2, -250)
+    t.goto(-initial_square_side / 2, -250)
     t.setheading(0)  # face east
     t.pendown()
 
     # we draw left square for the start
-    classic_pythagoras_tree(t, base_side, recursion_level, is_right=False)
+    classic_pythagoras_tree(t, initial_square_side, recursion_level, is_right=False)
 
     screen.mainloop()
 
@@ -106,4 +112,4 @@ if __name__ == "__main__":
 
 
 # Example usage:
-# python pythagoras_tree.py 5
+# python task_2_pythagoras_tree.py 7
