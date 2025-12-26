@@ -112,4 +112,4 @@ if __name__ == "__main__":
 
 
 # Example usage:
-# python task_2_pythagoras_tree.py 7
+# C:/src/GoIt/goit-algo-hw-final/.venv/Scripts/python.exe c:/src/GoIt/goit-algo-hw-final/task_2_pythagoras_tree.py 5
